@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getSeasonCalendar } from "../api/Api";
-import { ICalendar, ISeasonCalendar } from "../types/index.dto";
+import { ICalendar } from "../types/index.dto";
 
 const useSeasonsCalendar = (page: number) => {
   const [data, setData] = useState<null | ICalendar[]>(null);
@@ -9,7 +9,7 @@ const useSeasonsCalendar = (page: number) => {
   const [pages, setPages] = useState(0);
 
   const getData = useCallback(async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const res = await getSeasonCalendar(10, page);
       if (res.data) {
@@ -25,7 +25,7 @@ const useSeasonsCalendar = (page: number) => {
 
   useEffect(() => {
     getData();
-  }, [page]);
+  }, [page, getData]);
 
   return { isLoading, data, pages, error };
 };
